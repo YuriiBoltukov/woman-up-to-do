@@ -171,7 +171,7 @@ span {
 	width: 40px;
 }
 
-.modal {
+.edit_modal {
 	height: 100vh;
 	width: 100vw;
 	background-color: rgba(0, 0, 0, 0.4);
@@ -187,7 +187,7 @@ span {
 	z-index: 3;
 }
 
-.modal-content {
+.edit_modal-content {
 	padding: 20px;
 	border-radius: 12px;
 	background-color: white;
@@ -197,26 +197,30 @@ input[type='checkbox'] {
 	accent-color: gray;
 }
 
-.modal-header {
+.edit_modal-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding-bottom: 20px;
 }
 
-.modal-title {
+.edit_modal-title {
 	font-size: 36px;
 	font-weight: 500;
 }
+.edit_modal_main-title {
+	font-size: 18px;
+	font-weight: 500;
+}
 
-.modal-input {
+.edit_modal-input {
 	max-width: 400px;
 	padding: 15px;
 	font-size: 24px;
 	border-radius: 10px;
 }
 
-.modal-btn {
+.edit_modal-btn {
 	padding: 15px 40px;
 	margin: 20px 5px 5px 5px;
 	font-size: 20px;
@@ -256,22 +260,22 @@ input[type='checkbox'] {
 		margin: 0 auto;
 	}
 
-	.modal-content {
+	.edit_modal-content {
 		padding: 8px;
 		width: 90%;
 	}
-	.modal-header {
+	.edit_modal-header {
 		padding-bottom: 10px;
 	}
-	.modal-title {
+	.edit_modal-title {
 		font-style: 30px;
 	}
-	.modal-input {
+	.edit_modal-input {
 		padding: 4px;
 		font-size: 24px;
 		width: 90%;
 	}
-	.modal-btn {
+	.edit_modal-btn {
 		padding: 10px 30px;
 		font-size: 16px;
 		margin: 5px;

@@ -19,6 +19,7 @@ const TodoItem: React.FC<ITodoItem> = (props: ITodoItem) => {
 	 * modal window state
 	 */
 	const [modalActive, setModalActive] = useState(false);
+	const [descriptionActive, setDescriptionActive] = useState(false);
 
 	/**
 	 * for updating todo
