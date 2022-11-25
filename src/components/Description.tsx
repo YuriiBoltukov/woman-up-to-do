@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import closeIcon from '../assets/icons/close.svg';
-import { DescriptionProps } from '../interfaceces/interface';
+import { DescriptionProps } from '../models/data';
 
 export const Description = (props: DescriptionProps) => {
 	/**

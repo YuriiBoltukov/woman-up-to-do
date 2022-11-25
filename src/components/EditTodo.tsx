@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import closeIcon from '../assets/icons/close.svg';
 
-export default function Modal(props: any) {
+export default function EditTodo(props: any) {
 	/**
 	 * active state for modal window
 	 */
@@ -83,10 +83,10 @@ export default function Modal(props: any) {
 							/>
 						</label>
 						<label>
-							<p className='edit_modal_main-title'>Completion date</p>
+							<p className='edit_modal_main-title'>Documents</p>
 							<input
 								className='edit_modal-input'
-								type='date'
+								type='file'
 								value={form.title}
 								ref={inputRef}
 								onChange={handleChange}

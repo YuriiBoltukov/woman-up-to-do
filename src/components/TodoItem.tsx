@@ -1,40 +1,17 @@
 import React, { useState } from 'react';
-import pencilIcon from '../assets/icons/pencil.svg';
+
 import trashIcon from '../assets/icons/trash.svg';
 import viewing from '../assets/icons/eye.svg';
 import { ITodoItem } from '../models/data';
-import Modal from './Modal';
 
-const TodoItem: React.FC<ITodoItem> = (props: ITodoItem) => {
-	const {
-		id,
-		title,
-		complete,
-		toggleComplete,
-		removeTodo,
-		updateTodo,
-	}: ITodoItem = props;
-
-	/**
-	 * modal window state
-	 */
-	const [modalActive, setModalActive] = useState(false);
-	const [descriptionActive, setDescriptionActive] = useState(false);
-
+export const TodoItem: React.FC = props => {
 	/**
 	 * for updating todo
 	 * @param {string} value
 	 */
-	const updateTask = (value: string): void => {
-		updateTodo(id, value);
-	};
-
-	/**
-	 * for opening modal window
-	 */
-	const openModal = (): void => {
-		setModalActive(true);
-	};
+	// const updateTask = (value: string): void => {
+	// 	updateTodo(id, value);
+	// };
 
 	return (
 		<div className='todo-item'>
@@ -43,11 +20,11 @@ const TodoItem: React.FC<ITodoItem> = (props: ITodoItem) => {
 				<input
 					className='checkbox'
 					type='checkbox'
-					checked={complete}
-					onChange={() => toggleComplete(id)}
+					//checked={complete}
+					//onChange={() => toggleComplete(id)}
 				/>
 			</div>
-			<p className={complete ? 'title completed-task' : 'title'}>{title}</p>
+			{/* <p className={complete ? 'title completed-task' : 'title'}>{title}</p> */}
 			<div className='btn-wrapper'>
 				<div>
 					<button className='btn ripple'>
@@ -55,26 +32,12 @@ const TodoItem: React.FC<ITodoItem> = (props: ITodoItem) => {
 					</button>
 				</div>
 
-				<div className='edit-btn'>
-					<button className='btn ripple' onClick={openModal}>
-						<img className='edit' src={pencilIcon} alt='To edit' />
-					</button>
-				</div>
+				<div className='edit-btn'></div>
 
-				<button className='btn ripple' onClick={() => removeTodo(id)}>
+				<button className='btn ripple'>
 					<img src={trashIcon} alt='To trash' />
 				</button>
 			</div>
-			{modalActive && (
-				<Modal
-					updateTask={updateTask}
-					active={modalActive}
-					setActive={setModalActive}
-					value={title}
-				/>
-			)}
 		</div>
 	);
 };
-
-export { TodoItem };

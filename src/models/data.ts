@@ -1,7 +1,14 @@
 export interface ITodo {
-	id: number;
+	id: string;
 	title: string;
+	description: string;
+	date: string;
+	file: string[] | string;
 	complete: boolean;
+}
+
+export interface IState {
+	todos: ITodo[];
 }
 
 export interface ITodoItem extends ITodo {
@@ -15,4 +22,8 @@ export interface ITodoList {
 	toggleComplete: (id: number) => void;
 	removeTodo: (id: number) => void;
 	updateTodo: (id: number, title: string) => void;
+}
+
+export interface DescriptionProps extends ITodo {
+	setActive: () => void;
 }

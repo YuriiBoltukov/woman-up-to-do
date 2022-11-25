@@ -1,20 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { TodoItem } from './TodoItem';
-import { ITodo, ITodoList } from '../models/data';
+import { IState, ITodo, ITodoList } from '../models/data';
 
-const TodoList: React.FC<ITodoList> = (props: ITodoList) => {
-	const { items, toggleComplete, removeTodo, updateTodo }: ITodoList = props;
-
+const TodoList: React.FC = () => {
+	const todos = useSelector((state: IState) => state.todos);
 	return (
 		<div className='item-wrapper'>
-			{items.map((todo: ITodo) => (
-				<TodoItem
-					key={todo.id}
-					toggleComplete={toggleComplete}
-					removeTodo={removeTodo}
-					updateTodo={updateTodo}
-					{...todo}
-				/>
+			{todos.map((todo: ITodo) => (
+				<TodoItem key={todo.id} />
 			))}
 		</div>
 	);
