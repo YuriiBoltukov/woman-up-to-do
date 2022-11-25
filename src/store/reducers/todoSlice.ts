@@ -19,7 +19,9 @@ const todoSlice = createSlice({
 				complete: action.payload.complete,
 			});
 		},
-		removeTodo(state, action) {},
+		removeTodo(state, action) {
+			// state.todos = state.todos.filter(todo => todo?.id !== action.payload.id);
+		},
 		toggleTodoComplete(state, action) {},
 		editTodo(state, action) {},
 	},

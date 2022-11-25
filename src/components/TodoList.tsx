@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { TodoItem } from './TodoItem';
+import { TodoItem } from './TodoItem/TodoItem';
 import { IState, ITodo, ITodoList } from '../models/data';
 
 const TodoList: React.FC = () => {
@@ -8,7 +8,7 @@ const TodoList: React.FC = () => {
 	return (
 		<div className='item-wrapper'>
 			{todos.map((todo: ITodo) => (
-				<TodoItem key={todo.id} />
+				<TodoItem key={todo.id} {...todo} />
 			))}
 		</div>
 	);

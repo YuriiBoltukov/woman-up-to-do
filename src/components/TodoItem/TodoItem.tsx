@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import trashIcon from '../assets/icons/trash.svg';
-import viewing from '../assets/icons/eye.svg';
-import { addTodo } from '../store/reducers/todoSlice';
-import { ITodoItem } from '../models/data';
+import trashIcon from '../../assets/icons/trash.svg';
+import viewing from '../../assets/icons/eye.svg';
+import { addTodo } from '../../store/reducers/todoSlice';
+import { ITodoItem } from '../../models/data';
 
 export const TodoItem = () => {
 	const [form, setForm] = useState({
@@ -12,8 +12,7 @@ export const TodoItem = () => {
 		date: '',
 		file: '',
 	});
-	const dispatch = useDispatch();
-	const addTask = () => dispatch(addTodo(form));
+
 	// /**
 	//  * for updating todo
 	//  * @param {string} value

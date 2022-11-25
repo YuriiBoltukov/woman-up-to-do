@@ -3,17 +3,13 @@ import closeIcon from '../assets/icons/close.svg';
 
 export default function EditTodo(props: any) {
 	/**
-	 * active state for modal window
-	 */
-	const { isActive, setActive } = props;
-
-	/**
 	 * form data
 	 */
-	const [form, setForm] = useState<{
-		[key: string]: string | number;
-	}>({
-		title: props.value,
+	const [form, setForm] = useState({
+		title: '',
+		description: '',
+		date: '',
+		file: '',
 	});
 
 	/**
@@ -29,7 +25,7 @@ export default function EditTodo(props: any) {
 	const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({
 		target,
 	}: React.ChangeEvent<HTMLInputElement>): void => {
-		setForm({ title: target.value });
+		setForm({ ...form, title: target.value });
 	};
 
 	/**
@@ -40,16 +36,10 @@ export default function EditTodo(props: any) {
 	}, []);
 
 	return (
-		<div className='edit_modal' onClick={() => setActive(false)}>
+		<div className='edit_modal'>
 			<div
 				className='edit_modal-content'
 				onClick={(event: React.MouseEvent) => event.stopPropagation()}>
-				<div className='edit_modal-header'>
-					<h3 className='edit_modal-title'>Edit Task</h3>
-					<button className='btn' onClick={() => setActive(false)}>
-						<img src={closeIcon} alt='To close' />
-					</button>
-				</div>
 				<div className='edit_modal-main'>
 					<form>
 						<label>
@@ -95,11 +85,7 @@ export default function EditTodo(props: any) {
 					</form>
 				</div>
 				<div className='edit_modal-footer'>
-					<button
-						className='edit_modal-btn ripple'
-						onClick={() => setActive(false)}>
-						Close
-					</button>
+					<button className='edit_modal-btn ripple'>Close</button>
 					<button
 						className='edit_modal-btn ripple'
 						onClick={() => props.updateTask(form.title)}>
