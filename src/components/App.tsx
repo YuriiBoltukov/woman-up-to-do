@@ -70,12 +70,16 @@ const App: React.FC = () => {
 							</Link>
 						</li>
 						<li>
-							<button className='btn ripple'>
-								<img className='edit' src={pencilIcon} alt='To edit' />
-								<p>Edit</p>
-							</button>
+							<Link to={'/edit'}>
+								<button className='btn ripple'>
+									<img className='edit' src={pencilIcon} alt='To edit' />
+									<p>Edit</p>
+								</button>
+							</Link>
 						</li>
-						<li></li>
+						<li>
+							<Link to={''}></Link>
+						</li>
 					</ul>
 				</nav>
 			</header>
