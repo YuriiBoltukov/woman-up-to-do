@@ -1,13 +1,11 @@
-import { log } from 'console';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { ITodo } from '../../models/data';
 import { addTodo } from '../../store/reducers/todoSlice';
 import style from './create.module.scss';
 
 export const CreateTodo = () => {
 	const dispatch = useDispatch();
-	const addTask = () => dispatch(addTodo({ form }));
+	const addTask = () => dispatch(addTodo({}));
 	/**
 	 * form state
 	 */
@@ -22,7 +20,6 @@ export const CreateTodo = () => {
 		key: string
 	) => {
 		event.preventDefault();
-		console.log(form);
 		setForm({ ...form, [key]: event.target.value });
 	};
 	const handleFileClick = () => {
@@ -80,7 +77,7 @@ export const CreateTodo = () => {
 				</div>
 			</label>
 			<div className={style.form_wrapper}>
-				<button className={style.form_add}>
+				<button className={style.form_add} onClick={addTask}>
 					<span>Add</span>
 				</button>
 			</div>

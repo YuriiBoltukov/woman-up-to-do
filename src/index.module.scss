@@ -30,28 +30,7 @@ span {
 .item-wrapper {
 	width: 535px;
 }
-.todo-item {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	background-color: #fff;
-	margin: 5px;
-	padding: 10px;
-}
 
-.todo-item:first-child {
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
-}
-.todo-item:last-child {
-	border-bottom-left-radius: 8px;
-	border-bottom-right-radius: 8px;
-}
-
-.checkbox {
-	width: 25px;
-	height: 25px;
-}
 
 .title {
 	font-size: 20px;

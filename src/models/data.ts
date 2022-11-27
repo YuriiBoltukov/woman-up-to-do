@@ -1,10 +1,10 @@
 export interface ITodo {
-	id: string;
-	title: string;
-	description: string;
-	date: string;
-	file: string[] | string;
-	complete: boolean;
+	id?: string;
+	title?: string;
+	description?: string;
+	date?: string;
+	file?: string[] | string;
+	complete?: boolean;
 }
 
 export interface IState {

@@ -72,13 +72,6 @@ const App: React.FC = () => {
 							</Link>
 						</li>
 						<li className={style.header_nav}>
-							<Link to={'/edit'}>
-								<button className={`${style.btn} ${style.btn_ripple}`}>
-									Edit To Do
-								</button>
-							</Link>
-						</li>
-						<li className={style.header_nav}>
 							<Link to={'/'}>
 								<button className={`${style.btn} ${style.btn_ripple}`}>
 									To Do List

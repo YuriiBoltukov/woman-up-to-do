@@ -4,10 +4,10 @@ import { TodoItem } from './TodoItem/TodoItem';
 import { IState, ITodo, ITodoList } from '../models/data';
 
 const TodoList: React.FC = () => {
-	const todos = useSelector((state: IState) => state.todos);
+	const todos = useSelector((state: any) => state.todos);
 	return (
 		<div className='item-wrapper'>
-			{todos.map((todo: ITodo) => (
+			{todos?.todos?.map((todo: ITodo) => (
 				<TodoItem key={todo.id} {...todo} />
 			))}
 		</div>
