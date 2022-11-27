@@ -1,0 +1,27 @@
+.drop_shadow {
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	background-color: rgba(169, 166, 166, 0.657);
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.view {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	border: 1px solid #2f4f4f;
+	padding: 12px;
+	border-radius: 8px;
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	opacity: 1;
+	z-index: 2;
+}

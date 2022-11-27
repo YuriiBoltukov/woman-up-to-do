@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../store/reducers/todoSlice';
+import { Upload } from '../Upload/Upload';
 import style from './create.module.scss';
 
 export const CreateTodo = () => {
 	const dispatch = useDispatch();
-	const addTask = () => dispatch(addTodo({}));
+	const addTask = () => dispatch(addTodo(form));
 	/**
 	 * form state
 	 */
@@ -15,6 +16,7 @@ export const CreateTodo = () => {
 		date: '',
 		file: '',
 	});
+	const handleSubmit = () => {};
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
 		key: string
@@ -22,9 +24,13 @@ export const CreateTodo = () => {
 		event.preventDefault();
 		setForm({ ...form, [key]: event.target.value });
 	};
-	const handleFileClick = () => {
-		const input = document.getElementById('fileID');
-		input?.click();
+
+	const handleFileUploader = (event: any) => {
+		event.preventDefault();
+		const file = event.target.files[0];
+		let formData = new FormData();
+		formData.append('file', file);
+		console.log(event.target.files);
 	};
 
 	return (
@@ -36,6 +42,7 @@ export const CreateTodo = () => {
 					className={style.form_input}
 					value={form.title}
 					onChange={e => handleChange(e, 'title')}
+					required
 				/>
 			</label>
 			<label>
@@ -58,23 +65,8 @@ export const CreateTodo = () => {
 				/>
 			</label>
 			<label>
-				<div className={style.form_drop_box}>
-					<p>
-						<h4>Select File here</h4>
-					</p>
-					<p>Files Supported: PDF, TEXT, DOC , DOCX</p>
-					<input
-						type='file'
-						hidden
-						accept='.doc,.docx,.pdf'
-						id='fileID'
-						className={style.file_input}
-						onChange={e => handleChange(e, 'file')}
-					/>
-					<button className='btn' onClick={handleFileClick}>
-						Choose File
-					</button>
-				</div>
+				<input type='file' multiple onChange={e => handleFileUploader(e)} />
+				<Upload />
 			</label>
 			<div className={style.form_wrapper}>
 				<button className={style.form_add} onClick={addTask}>

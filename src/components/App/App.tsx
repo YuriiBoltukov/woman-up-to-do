@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ITodo } from '../../models/data';
 import { TodoList } from '../TodoList';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, useParams } from 'react-router-dom';
 import { CreateTodo } from '../CreateTodo/CreateTodo';
 import { NotFoundPage } from '../NotFoundPage';
 import style from './app.module.scss';
@@ -86,7 +86,7 @@ const App: React.FC = () => {
 				<Routes>
 					<Route path='/' element={<TodoList />} />
 					<Route path='/create' element={<CreateTodo />} />
-					<Route path='/update' element={<EditTodo />} />
+					<Route path='/update/:id' element={<EditTodo />} />
 					<Route path='*' element={<NotFoundPage />} />
 				</Routes>
 			</section>

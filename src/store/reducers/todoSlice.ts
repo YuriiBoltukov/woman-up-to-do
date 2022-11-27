@@ -12,7 +12,7 @@ const todoSlice = createSlice({
 				title: 'add item to list',
 				complete: false,
 				description: 'lorem',
-				date: '22-12-22',
+				date: '2022/12/20',
 				file: [],
 			},
 			{
@@ -20,7 +20,7 @@ const todoSlice = createSlice({
 				title: 'you can delete item from list',
 				complete: false,
 				description: 'lorem',
-				date: '22-12-22',
+				date: '2022/12/20',
 				file: [],
 			},
 			{
@@ -28,7 +28,7 @@ const todoSlice = createSlice({
 				title: 'click on item to check',
 				complete: false,
 				description: 'lorem',
-				date: '22-12-22',
+				date: '2022/12/20',
 				file: [],
 			},
 			{
@@ -36,7 +36,7 @@ const todoSlice = createSlice({
 				title: 'click on item again to uncheck',
 				complete: true,
 				description: 'lorem',
-				date: '22-12-22',
+				date: '2022/12/20',
 				file: [],
 			},
 		],
@@ -47,7 +47,7 @@ const todoSlice = createSlice({
 				id: nanoid().slice(4),
 				title: action.payload.title,
 				description: action.payload.description,
-				date: dayjs().format('DD.MM.YY'),
+				date: dayjs().format('YYYY/MM/DD'),
 				file: action.payload.file,
 				complete: action.payload.complete,
 			});

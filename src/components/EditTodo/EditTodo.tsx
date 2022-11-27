@@ -1,98 +1,93 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import style from './edit.module.scss';
+import { addTodo } from '../../store/reducers/todoSlice';
 import closeIcon from '../assets/icons/close.svg';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 export default function EditTodo(props: any) {
+	const dispatch = useDispatch();
+	const addTask = () => dispatch(addTodo({}));
+	const params = useParams();
+	const location = useLocation();
+	const { todo } = location.state;
 	/**
 	 * form data
 	 */
 	const [form, setForm] = useState({
-		title: '',
-		description: '',
-		date: '',
-		file: '',
+		title: todo.title,
+		description: todo.description,
+		date: todo.date,
+		file: todo.file,
 	});
 
-	/**
-	 * instance of HTMLInputElement
-	 */
-	const inputRef: React.RefObject<HTMLInputElement> =
-		useRef<HTMLInputElement>(null);
-
-	/**
-	 * to handle input changes
-	 * @param {React.ChangeEvent<HTMLInputElement>} target
-	 */
-	const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({
-		target,
-	}: React.ChangeEvent<HTMLInputElement>): void => {
-		setForm({ ...form, title: target.value });
+	const handleChange = (
+		event: React.ChangeEvent<HTMLInputElement>,
+		key: string
+	) => {
+		event.preventDefault();
+		setForm({ ...form, [key]: event.target.value });
+	};
+	const handleFileClick = () => {
+		const input = document.getElementById('fileID');
+		input?.click();
 	};
 
-	/**
-	 * to set focus on input
-	 */
-	useEffect(() => {
-		inputRef.current?.focus();
-	}, []);
-
 	return (
-		<div className='edit_modal'>
-			<div
-				className='edit_modal-content'
-				onClick={(event: React.MouseEvent) => event.stopPropagation()}>
-				<div className='edit_modal-main'>
-					<form>
-						<label>
-							<p className='edit_modal_main-title'>Title</p>
-							<input
-								className='edit_modal-input'
-								type='text'
-								value={form.title}
-								ref={inputRef}
-								onChange={handleChange}
-							/>
-						</label>
-						<label>
-							<p className='edit_modal_main-title'>Description</p>
-							<input
-								className='edit_modal-input'
-								type='text'
-								value={form.title}
-								ref={inputRef}
-								onChange={handleChange}
-							/>
-						</label>
-						<label>
-							<p className='edit_modal_main-title'>Completion date</p>
-							<input
-								className='edit_modal-input'
-								type='date'
-								value={form.title}
-								ref={inputRef}
-								onChange={handleChange}
-							/>
-						</label>
-						<label>
-							<p className='edit_modal_main-title'>Documents</p>
-							<input
-								className='edit_modal-input'
-								type='file'
-								value={form.title}
-								ref={inputRef}
-								onChange={handleChange}
-							/>
-						</label>
-					</form>
-				</div>
-				<div className='edit_modal-footer'>
-					<button className='edit_modal-btn ripple'>Close</button>
-					<button
-						className='edit_modal-btn ripple'
-						onClick={() => props.updateTask(form.title)}>
-						Confirm
+		<form className={style.form}>
+			<label>
+				<p className={style.form_text}>Title</p>
+				<input
+					type='text'
+					className={style.form_input}
+					value={form.title}
+					onChange={e => handleChange(e, 'title')}
+				/>
+			</label>
+			<label>
+				<p className={style.form_text}>Description</p>
+				<input
+					type='text'
+					id='title'
+					className={style.form_input}
+					value={form.description}
+					onChange={e => handleChange(e, 'description')}
+				/>
+			</label>
+			<label>
+				<p className={style.form_text}>Date</p>
+				<input
+					type='date'
+					className={style.form_input}
+					value={form.date}
+					onChange={e => handleChange(e, 'date')}
+				/>
+			</label>
+			<label>
+				<div className={style.form_drop_box}>
+					<p>
+						<h4>Select File here</h4>
+					</p>
+					<p>Files Supported: PDF, TEXT, DOC , DOCX</p>
+					<input
+						type='file'
+						hidden
+						accept='.doc,.docx,.pdf'
+						id='fileID'
+						className={style.file_input}
+						onChange={e => handleChange(e, 'file')}
+					/>
+					<button className='btn' onClick={handleFileClick}>
+						Choose File
 					</button>
 				</div>
+			</label>
+			<div className={style.form_wrapper}>
+				<button className={style.form_add} onClick={addTask}>
+					<span>Edit</span>
+				</button>
 			</div>
-		</div>
+		</form>
 	);
 }

@@ -3,7 +3,7 @@ import style from './file.module.scss';
 
 export const FileView = (props: any) => {
 	return (
-		<div className={style.drop_shadow}>
+		<div className={style.drop_shadow} onClick={props.handleOpen}>
 			<div className={style.file}>
 				<h4>Added files</h4>
 				{props.files.length ? (

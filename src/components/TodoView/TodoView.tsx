@@ -1,16 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import style from './view.module.scss';
 
 export const TodoView = (props: any) => {
-	const { title, date, description, file } = props.todos.todos;
-	console.log(props.todos.todos);
+	const { title, date, description, file } = props.todos;
+
 	return (
-		<div className={style.drop_shadow}>
+		<div className={style.drop_shadow} onClick={props.handleOpen}>
 			<div className={style.view}>
+				<div>{date}</div>
 				<div>
 					<h4>{title}</h4>
 				</div>
-				<div>{date}</div>
 				<div>
 					<p>{description}</p>
 				</div>
@@ -26,8 +28,10 @@ export const TodoView = (props: any) => {
 					</ul>
 				</div>
 				<div>
-					<button>Edit</button>
-					<button>Close</button>
+					<Link to='/update'>
+						<button>Edit</button>
+					</Link>
+					<button onClick={props.handleOpen}>Close</button>
 				</div>
 			</div>
 		</div>

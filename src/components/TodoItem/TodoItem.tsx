@@ -4,16 +4,16 @@ import trashIcon from '../../assets/icons/trash.svg';
 import viewing from '../../assets/icons/eye.svg';
 import pencil from '../../assets/icons/pencil.svg';
 import { addTodo } from '../../store/reducers/todoSlice';
-import { IState, ITodoItem } from '../../models/data';
+import { IState, ITodo, ITodoItem } from '../../models/data';
 import style from './item.module.scss';
 import { FileView } from '../FileView/FileView';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { TodoView } from '../TodoView/TodoView';
 
 export const TodoItem = (props: any) => {
-	const todos = useSelector((state: IState) => state.todos);
 	const [open, setOpen] = useState(false);
 	const [openDescription, setOpenDescription] = useState(false);
+	const data = props;
 
 	function handleOpen() {
 		setOpen(!open);
@@ -44,13 +44,13 @@ export const TodoItem = (props: any) => {
 				<span></span>
 			</div>
 			<div className={style.todo_btn}>
-				<button onClick={handleOpenDescription}>Viewing</button>
-				<Link to='/update'>
+				<button onClick={() => handleOpenDescription()}>Viewing</button>
+				<Link to='/update/:id' state={{ todo: data }}>
 					<button>Edit</button>
 				</Link>
 			</div>
 			{openDescription ? (
-				<TodoView todos={todos} handleOpen={handleOpenDescription} />
+				<TodoView todos={props} handleOpen={handleOpenDescription} />
 			) : null}
 			{open ? <FileView files={props.file} handleOpen={handleOpen} /> : null}
 		</div>

@@ -1,0 +1,20 @@
+.drag {
+	width: 340px;
+	height: 120px;
+	background-color: #fff;
+	padding: 12px;
+	margin: 8px auto;
+	border: 1px dashed #a9a9a9;
+	font-size: 14px;
+	color: #696969;
+	text-align: center;
+}
+
+.drop {
+	width: 60wv;
+	height: 60vh;
+	border: 5px dashed black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
