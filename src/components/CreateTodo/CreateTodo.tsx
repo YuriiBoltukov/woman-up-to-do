@@ -6,7 +6,7 @@ import style from './create.module.scss';
 
 export const CreateTodo = () => {
 	const dispatch = useDispatch();
-	const addTask = () => dispatch(addTodo(form));
+	const addTask = (form: any) => dispatch(addTodo(form));
 	/**
 	 * form state
 	 */
@@ -16,7 +16,16 @@ export const CreateTodo = () => {
 		date: '',
 		file: '',
 	});
-	const handleSubmit = () => {};
+	const handleSubmit = (e: any, form: any) => {
+		e.preventDefault();
+		addTask(form);
+		setForm({
+			title: '',
+			description: '',
+			date: '',
+			file: '',
+		});
+	};
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
 		key: string
@@ -30,7 +39,6 @@ export const CreateTodo = () => {
 		const file = event.target.files[0];
 		let formData = new FormData();
 		formData.append('file', file);
-		console.log(event.target.files);
 	};
 
 	return (
@@ -69,7 +77,7 @@ export const CreateTodo = () => {
 				<Upload />
 			</label>
 			<div className={style.form_wrapper}>
-				<button className={style.form_add} onClick={addTask}>
+				<button className={style.form_add} onClick={e => handleSubmit(e, form)}>
 					<span>Add</span>
 				</button>
 			</div>

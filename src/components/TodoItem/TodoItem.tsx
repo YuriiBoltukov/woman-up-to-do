@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import trashIcon from '../../assets/icons/trash.svg';
-import viewing from '../../assets/icons/eye.svg';
-import pencil from '../../assets/icons/pencil.svg';
-import { addTodo } from '../../store/reducers/todoSlice';
-import { IState, ITodo, ITodoItem } from '../../models/data';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { removeTodo, toggleTodoComplete } from '../../store/reducers/todoSlice';
 import style from './item.module.scss';
 import { FileView } from '../FileView/FileView';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { TodoView } from '../TodoView/TodoView';
 
 export const TodoItem = (props: any) => {
+	const dispatch = useDispatch();
+
 	const [open, setOpen] = useState(false);
 	const [openDescription, setOpenDescription] = useState(false);
 	const data = props;
-
 	function handleOpen() {
 		setOpen(!open);
 	}
 	function handleOpenDescription() {
 		setOpenDescription(!openDescription);
+	}
+
+	function completeTodo(id: any) {
+		dispatch(toggleTodoComplete(id));
+	}
+
+	function remove(id: any) {
+		console.log(id);
+		dispatch(removeTodo(id));
 	}
 
 	return (
@@ -29,12 +35,17 @@ export const TodoItem = (props: any) => {
 				<input
 					className={style.todo_check_checkbox}
 					type='checkbox'
-					//checked={complete}
-					//onChange={() => toggleComplete(id)}
+					checked={props.complete}
+					onChange={() => completeTodo(props.id)}
 				/>
 				<p className={style.todo_check_date}>{props.date}</p>
 			</div>
-			<div className={style.todo_text}>
+			<div
+				className={
+					props.complete
+						? `${style.todo_text} ${style.todo_complete}`
+						: style.todo_text
+				}>
 				<div className={style.todo_text_title}>
 					<p>{props.title}</p>
 				</div>
@@ -48,6 +59,7 @@ export const TodoItem = (props: any) => {
 				<Link to='/update/:id' state={{ todo: data }}>
 					<button>Edit</button>
 				</Link>
+				<button onClick={() => remove(props.id)}>Remove</button>
 			</div>
 			{openDescription ? (
 				<TodoView todos={props} handleOpen={handleOpenDescription} />

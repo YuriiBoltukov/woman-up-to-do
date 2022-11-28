@@ -47,6 +47,9 @@
 			background-color: lightgray;
 		}
 	}
+	&_complete {
+		text-decoration: line-through;
+	}
 	&_btn {
 		display: flex;
 		align-items: center;

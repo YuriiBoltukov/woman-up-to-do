@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { TodoItem } from './TodoItem/TodoItem';
-import { IState, ITodo, ITodoList } from '../models/data';
+import { ITodo } from '../models/data';
 
 const TodoList: React.FC = () => {
 	const todos = useSelector((state: any) => state.todos);

@@ -1,15 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
 import style from './edit.module.scss';
 import { addTodo } from '../../store/reducers/todoSlice';
-import closeIcon from '../assets/icons/close.svg';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 export default function EditTodo(props: any) {
 	const dispatch = useDispatch();
 	const addTask = () => dispatch(addTodo({}));
-	const params = useParams();
 	const location = useLocation();
 	const { todo } = location.state;
 	/**
@@ -28,10 +25,6 @@ export default function EditTodo(props: any) {
 	) => {
 		event.preventDefault();
 		setForm({ ...form, [key]: event.target.value });
-	};
-	const handleFileClick = () => {
-		const input = document.getElementById('fileID');
-		input?.click();
 	};
 
 	return (
@@ -64,28 +57,10 @@ export default function EditTodo(props: any) {
 					onChange={e => handleChange(e, 'date')}
 				/>
 			</label>
-			<label>
-				<div className={style.form_drop_box}>
-					<p>
-						<h4>Select File here</h4>
-					</p>
-					<p>Files Supported: PDF, TEXT, DOC , DOCX</p>
-					<input
-						type='file'
-						hidden
-						accept='.doc,.docx,.pdf'
-						id='fileID'
-						className={style.file_input}
-						onChange={e => handleChange(e, 'file')}
-					/>
-					<button className='btn' onClick={handleFileClick}>
-						Choose File
-					</button>
-				</div>
-			</label>
+			<label></label>
 			<div className={style.form_wrapper}>
 				<button className={style.form_add} onClick={addTask}>
-					<span>Edit</span>
+					Edit
 				</button>
 			</div>
 		</form>
