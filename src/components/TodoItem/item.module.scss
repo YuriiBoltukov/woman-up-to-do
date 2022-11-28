@@ -50,6 +50,11 @@
 	&_complete {
 		text-decoration: line-through;
 	}
+	&_icon svg {
+		width: 32px;
+		height: 32px;
+		transform: rotate(30deg);
+	}
 	&_btn {
 		display: flex;
 		align-items: center;

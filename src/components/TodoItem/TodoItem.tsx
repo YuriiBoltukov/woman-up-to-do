@@ -5,6 +5,7 @@ import style from './item.module.scss';
 import { FileView } from '../FileView/FileView';
 import { Link } from 'react-router-dom';
 import { TodoView } from '../TodoView/TodoView';
+import { attach } from '../../assets/icons/icons';
 
 export const TodoItem = (props: any) => {
 	const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export const TodoItem = (props: any) => {
 	const [open, setOpen] = useState(false);
 	const [openDescription, setOpenDescription] = useState(false);
 	const data = props;
+
 	function handleOpen() {
 		setOpen(!open);
 	}
@@ -49,12 +51,12 @@ export const TodoItem = (props: any) => {
 				<div className={style.todo_text_title}>
 					<p>{props.title}</p>
 				</div>
-				<div className={style.todo_text_files} onClick={handleOpen}>
-					Files: {props.file.length ? props.file.length : 0}
-				</div>
-				<span></span>
 			</div>
 			<div className={style.todo_btn}>
+				{props.file.length ? (
+					<span className={style.todo_icon}>{attach}</span>
+				) : null}
+
 				<button onClick={() => handleOpenDescription()}>Viewing</button>
 				<Link to='/update/:id' state={{ todo: data }}>
 					<button>Edit</button>

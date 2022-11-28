@@ -4,10 +4,13 @@ import { addTodo } from '../../store/reducers/todoSlice';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-export default function EditTodo(props: any) {
+export default function EditTodo() {
 	const dispatch = useDispatch();
 	const addTask = () => dispatch(addTodo({}));
 	const location = useLocation();
+	if (!location) {
+		window.history.back();
+	}
 	const { todo } = location.state;
 	/**
 	 * form data

@@ -47,7 +47,7 @@ const todoSlice = createSlice({
 				id: nanoid().slice(4),
 				title: action.payload.title,
 				description: action.payload.description,
-				date: dayjs().format('YYYY/MM/DD'),
+				date: dayjs().format('YYYY-MM-DD'),
 				file: action.payload.file,
 				complete: action.payload.complete,
 			});
@@ -59,7 +59,13 @@ const todoSlice = createSlice({
 			const toggledTodo = state.todos.find(todo => todo.id === action.payload);
 			if (toggledTodo) toggledTodo.complete = !toggledTodo.complete;
 		},
-		editTodo(state, action) {},
+		editTodo(state, action) {
+			state.todos.forEach((todo: any) => {
+				if (todo.id === action.payload.id) {
+					todo = action.payload;
+				}
+			});
+		},
 	},
 });
 
