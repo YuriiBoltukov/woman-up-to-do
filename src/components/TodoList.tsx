@@ -1,21 +1,16 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { TodoItem } from './TodoItem/TodoItem';
-import { ITodo } from '../models/data';
-import { fetchToDos } from '../store/reducers/todoSlice';
+import { ITodoRes } from '../models/data';
 
 const TodoList: React.FC = () => {
 	const todos = useSelector((state: any) => state.todos);
 
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(fetchToDos());
-	}, []);
+	useEffect(() => {}, []);
 
 	return (
 		<div className='item-wrapper'>
-			{todos?.todos?.map((todo: ITodo) => (
+			{todos?.todos?.map((todo: ITodoRes) => (
 				<TodoItem key={todo.id} {...todo} />
 			))}
 		</div>

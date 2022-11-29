@@ -28,6 +28,7 @@ export default function EditTodo() {
 		description: todo.description,
 		date: todo.date,
 		file: todo.file,
+		complete: todo.complete,
 	});
 
 	const handleChange = (

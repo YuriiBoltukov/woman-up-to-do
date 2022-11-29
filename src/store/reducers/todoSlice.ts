@@ -1,7 +1,6 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 import { ITodo, ITodoRes, ITodoState } from '../../models/data';
-import { getFromLocalStorage } from '../services/todo.services';
 
 // export const fetchToDos = createAsyncThunk('todos', thunkAPI => {
 // 	const response = getFromLocalStorage<ITodoRes[]>('todos');
@@ -11,40 +10,7 @@ import { getFromLocalStorage } from '../services/todo.services';
 const todoSlice = createSlice({
 	name: 'todos',
 	initialState: {
-		todos: [
-			{
-				id: '1',
-				title: 'add item to list',
-				complete: false,
-				description: 'lorem',
-				date: '2022/12/20',
-				file: [],
-			},
-			{
-				id: '2',
-				title: 'you can delete item from list',
-				complete: false,
-				description: 'lorem',
-				date: '2022/12/20',
-				file: [],
-			},
-			{
-				id: '3',
-				title: 'click on item to check',
-				complete: false,
-				description: 'lorem',
-				date: '2022/12/20',
-				file: [],
-			},
-			{
-				id: '4',
-				title: 'click on item again to uncheck',
-				complete: true,
-				description: 'lorem',
-				date: '2022/12/20',
-				file: [],
-			},
-		],
+		todos: [],
 	},
 	reducers: {
 		addTodo(state: ITodoState, action: PayloadAction<ITodo>) {
@@ -57,17 +23,17 @@ const todoSlice = createSlice({
 				complete: action.payload.complete,
 			});
 		},
-		removeTodo(state: ITodoState, action: PayloadAction<ITodo>) {
+		removeTodo(state: ITodoState, action: PayloadAction<string>) {
 			state.todos = state.todos.filter(
-				(todo: any) => todo.id !== action.payload
+				(todo: ITodoRes) => todo.id !== action.payload
 			);
 		},
-		toggleTodoComplete(state, action) {
+		toggleTodoComplete(state: ITodoState, action: PayloadAction<string>) {
 			const toggledTodo = state.todos.find(todo => todo.id === action.payload);
 			if (toggledTodo) toggledTodo.complete = !toggledTodo.complete;
 		},
-		editTodo(state, action) {
-			state.todos.forEach((todo: any) => {
+		editTodo(state: ITodoState, action: PayloadAction<ITodoRes>) {
+			state.todos.forEach((todo: ITodoRes) => {
 				if (todo.id === action.payload.id) {
 					todo.title = action.payload.title;
 					todo.description = action.payload.description;
@@ -76,19 +42,7 @@ const todoSlice = createSlice({
 				}
 			});
 		},
-		fetchToDos(state, action) {
-			const response = getFromLocalStorage<ITodoRes[]>('todos');
-			if (!response) return;
-			state.todos.length = 0;
-			state.todos.push(...response);
-		},
 	},
-	// extraReducers: builder => {
-	// 	builder.addCase(fetchToDos.fulfilled, (state, action) => {
-	// 		console.log(action);
-	// 		//state.todos.push(action.payload);
-	// 	});
-	// },
 });
 
 export const { addTodo, removeTodo, toggleTodoComplete, editTodo } =
