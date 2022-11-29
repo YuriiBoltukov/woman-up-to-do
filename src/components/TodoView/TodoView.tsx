@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import style from './view.module.scss';
 
 export const TodoView = (props: any) => {
@@ -8,7 +7,7 @@ export const TodoView = (props: any) => {
 
 	return (
 		<div className={style.drop_shadow} onClick={props.handleOpen}>
-			<div className={style.view}>
+			<div className={style.file}>
 				<div>{date}</div>
 				<div>
 					<h4>{title}</h4>
@@ -17,7 +16,7 @@ export const TodoView = (props: any) => {
 					<p>{description}</p>
 				</div>
 				<div>
-					<ul>
+					<ul className={style.file_list}>
 						{file ? (
 							file.map((item: any, i: any) => {
 								return <li key={i}>{item}</li>;

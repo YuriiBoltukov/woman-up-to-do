@@ -1,28 +1,37 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { ITodo } from '../../models/data';
 import { addTodo } from '../../store/reducers/todoSlice';
-import { Upload } from '../Upload/Upload';
 import style from './create.module.scss';
 
 export const CreateTodo = () => {
 	const dispatch = useDispatch();
-	const addTask = (form: any) => dispatch(addTodo(form));
+	const addTask = (form: ITodo) => dispatch(addTodo(form));
 
 	/**
 	 * instance of HTMLInputElement
 	 */
 	const inputRef = useRef<HTMLFormElement>(null);
 
+	const [file, setFile] = useState('');
+
 	/**
 	 * form state
 	 */
-	const [form, setForm] = useState({
+	const [form, setForm] = useState<ITodo>({
 		title: '',
 		description: '',
 		date: '',
-		file: '',
+		file: [],
+		complete: false,
 	});
-	const handleSubmit = (e: any, form: any) => {
+
+	/**
+	 * for submiting from form to state
+	 * @param {React.FormEvent} e
+	 * @param {ITodo} form
+	 */
+	const handleSubmit = (e: React.FormEvent, form: ITodo) => {
 		e.preventDefault();
 		validateForm();
 		addTask(form);
@@ -30,9 +39,17 @@ export const CreateTodo = () => {
 			title: '',
 			description: '',
 			date: '',
-			file: '',
+			file: [],
+			complete: false,
 		});
+		window.history.back();
 	};
+
+	/**
+	 * for binding html input element with form state
+	 * @param {React.ChangeEvent<HTMLInputElement>} event
+	 * @param {string} key
+	 */
 	const handleChange = (
 		event: React.ChangeEvent<HTMLInputElement>,
 		key: string
@@ -41,6 +58,16 @@ export const CreateTodo = () => {
 		setForm({ ...form, [key]: event.target.value });
 	};
 
+	function handleFileChange(e: any, key: string) {
+		e.preventDefault();
+		setFile(e.target.value.split('\\')[2]);
+		if (form.file) form.file.push(file);
+		setForm({ ...form, [key]: form.file });
+	}
+
+	/**
+	 * for validating form
+	 */
 	function validateForm() {
 		const inputElements = Array.from(document.querySelectorAll('input'));
 		inputElements.forEach(input => {
@@ -49,13 +76,6 @@ export const CreateTodo = () => {
 				input.setAttribute('aria-invalid', !input.reportValidity());
 		});
 	}
-
-	const handleFileUploader = (event: any) => {
-		event.preventDefault();
-		const file = event.target.files[0];
-		let formData = new FormData();
-		formData.append('file', file);
-	};
 
 	return (
 		<form className={style.form} ref={inputRef}>
@@ -88,10 +108,18 @@ export const CreateTodo = () => {
 					onChange={e => handleChange(e, 'date')}
 				/>
 			</label>
-			<label>
-				<input type='file' multiple onChange={e => handleFileUploader(e)} />
-				<Upload />
+			<label className={style.custom_file__label} htmlFor='field-upload'>
+				<input
+					type='file'
+					className={style.custom_file__input}
+					id='field-upload'
+					name='upload'
+					multiple
+					onChange={e => handleFileChange(e, 'file')}
+				/>
+				<p>{file}</p>
 			</label>
+
 			<div className={style.form_wrapper}>
 				<button className={style.form_add} onClick={e => handleSubmit(e, form)}>
 					<span>Add</span>

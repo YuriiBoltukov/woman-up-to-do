@@ -5,7 +5,7 @@ export interface ITodo {
 	title: string;
 	description?: string | undefined;
 	date?: string;
-	file?: string[] | string;
+	file?: string[];
 	complete: boolean;
 }
 

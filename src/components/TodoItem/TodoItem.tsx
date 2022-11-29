@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeTodo, toggleTodoComplete } from '../../store/reducers/todoSlice';
 import style from './item.module.scss';
-import { FileView } from '../FileView/FileView';
 import { Link } from 'react-router-dom';
 import { TodoView } from '../TodoView/TodoView';
 import { attach } from '../../assets/icons/icons';
@@ -10,20 +9,24 @@ import { attach } from '../../assets/icons/icons';
 export const TodoItem = (props: any) => {
 	const dispatch = useDispatch();
 
-	const [open, setOpen] = useState(false);
 	const [openDescription, setOpenDescription] = useState(false);
 	const data = props;
 
-	function handleOpen() {
-		setOpen(!open);
-	}
+	/**
+	 * for opening todo description
+	 */
 	function handleOpenDescription() {
 		setOpenDescription(!openDescription);
 	}
 
-	function completeTodo(id: any) {
+	/**
+	 * for changing complete status
+	 * @param {string} id
+	 */
+	function completeTodo(id: string) {
 		dispatch(toggleTodoComplete(id));
 	}
+
 	/**
 	 * for removing todo
 	 * @param {string} id
@@ -40,7 +43,7 @@ export const TodoItem = (props: any) => {
 					className={style.todo_check_checkbox}
 					type='checkbox'
 					checked={props.complete}
-					onChange={() => completeTodo(props.id)}
+					onChange={() => completeTodo(props?.id)}
 				/>
 				<p className={style.todo_check_date}>{props.date}</p>
 			</div>
@@ -55,9 +58,7 @@ export const TodoItem = (props: any) => {
 				</div>
 			</div>
 			<div className={style.todo_btn}>
-				{props.file.length ? (
-					<span className={style.todo_icon}>{attach}</span>
-				) : null}
+				{props.file ? <span className={style.todo_icon}>{attach}</span> : null}
 
 				<button onClick={() => handleOpenDescription()}>Viewing</button>
 				<Link to={`/update/${data.id}`}>
@@ -68,7 +69,6 @@ export const TodoItem = (props: any) => {
 			{openDescription ? (
 				<TodoView todos={props} handleOpen={handleOpenDescription} />
 			) : null}
-			{open ? <FileView files={props.file} handleOpen={handleOpen} /> : null}
 		</div>
 	);
 };

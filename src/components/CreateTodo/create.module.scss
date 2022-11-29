@@ -88,3 +88,55 @@
 .file_input {
 	display: none;
 }
+.custom_file {
+	&__input {
+		position: absolute;
+		width: 0.1px;
+		height: 0.1px;
+		opacity: 0;
+		overflow: hidden;
+		z-index: -1;
+	}
+	&__label {
+		position: relative;
+
+		display: block;
+		min-width: 335px;
+		min-height: 45px;
+
+		margin: 10px 0;
+		padding: 0;
+
+		background: #fff;
+		border: 1px solid #a3a3a3;
+		color: #2e2e2e;
+
+		line-height: 45px;
+		text-align: center;
+		text-transform: none;
+
+		cursor: pointer;
+		transition: all 0.3s;
+	}
+	&__input:valid ~ .custom_file__label {
+		border-color: #008000;
+		background: #008000;
+		color: #008000;
+
+		&:before {
+			content: '\f00c';
+
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+
+			margin: auto;
+
+			color: #fff;
+			font-family: 'FontAwesome';
+			line-height: 45px;
+		}
+	}
+}
