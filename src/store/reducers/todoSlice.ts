@@ -1,7 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import dayjs from 'dayjs';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-import { IState, ITodo } from '../../models/data';
+import { ITodo, ITodoRes, ITodoState } from '../../models/data';
+import { getFromLocalStorage } from '../services/todo.services';
+
+// export const fetchToDos = createAsyncThunk('todos', thunkAPI => {
+// 	const response = getFromLocalStorage<ITodoRes[]>('todos');
+// 	return response;
+// });
 
 const todoSlice = createSlice({
 	name: 'todos',
@@ -42,18 +47,20 @@ const todoSlice = createSlice({
 		],
 	},
 	reducers: {
-		addTodo(state: IState, action: PayloadAction<ITodo>) {
+		addTodo(state: ITodoState, action: PayloadAction<ITodo>) {
 			state.todos.push({
 				id: nanoid().slice(4),
 				title: action.payload.title,
 				description: action.payload.description,
-				date: dayjs().format('YYYY-MM-DD'),
+				date: action.payload.date,
 				file: action.payload.file,
 				complete: action.payload.complete,
 			});
 		},
-		removeTodo(state: IState, action: PayloadAction<ITodo>) {
-			state.todos = state.todos.filter(todo => todo.id !== action.payload);
+		removeTodo(state: ITodoState, action: PayloadAction<ITodo>) {
+			state.todos = state.todos.filter(
+				(todo: any) => todo.id !== action.payload
+			);
 		},
 		toggleTodoComplete(state, action) {
 			const toggledTodo = state.todos.find(todo => todo.id === action.payload);
@@ -62,11 +69,26 @@ const todoSlice = createSlice({
 		editTodo(state, action) {
 			state.todos.forEach((todo: any) => {
 				if (todo.id === action.payload.id) {
-					todo = action.payload;
+					todo.title = action.payload.title;
+					todo.description = action.payload.description;
+					todo.date = action.payload.date;
+					todo.file = action.payload.file;
 				}
 			});
 		},
+		fetchToDos(state, action) {
+			const response = getFromLocalStorage<ITodoRes[]>('todos');
+			if (!response) return;
+			state.todos.length = 0;
+			state.todos.push(...response);
+		},
 	},
+	// extraReducers: builder => {
+	// 	builder.addCase(fetchToDos.fulfilled, (state, action) => {
+	// 		console.log(action);
+	// 		//state.todos.push(action.payload);
+	// 	});
+	// },
 });
 
 export const { addTodo, removeTodo, toggleTodoComplete, editTodo } =

@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import style from './edit.module.scss';
-import { addTodo } from '../../store/reducers/todoSlice';
-import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { editTodo } from '../../store/reducers/todoSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { ITodo } from '../../models/data';
+import { useParams } from 'react-router-dom';
 
 export default function EditTodo() {
+	const { id } = useParams();
+
 	const dispatch = useDispatch();
-	const addTask = () => dispatch(addTodo({}));
-	const location = useLocation();
-	if (!location) {
-		window.history.back();
-	}
-	const { todo } = location.state;
+
+	const todo = useSelector((state: any) =>
+		state?.todos.todos.find((todo: any) => todo?.id === id)
+	);
+
+	const editTask = (e: any) => {
+		e.preventDefault();
+		console.log(localStorage.getItem('masha'));
+		dispatch(editTodo({ id, ...form }));
+	};
+
 	/**
 	 * form data
 	 */
-	const [form, setForm] = useState({
+	const [form, setForm] = useState<ITodo>({
 		title: todo.title,
 		description: todo.description,
 		date: todo.date,
@@ -29,7 +37,6 @@ export default function EditTodo() {
 		event.preventDefault();
 		setForm({ ...form, [key]: event.target.value });
 	};
-
 	return (
 		<form className={style.form}>
 			<label>
@@ -62,7 +69,7 @@ export default function EditTodo() {
 			</label>
 			<label></label>
 			<div className={style.form_wrapper}>
-				<button className={style.form_add} onClick={addTask}>
+				<button className={style.form_add} onClick={e => editTask(e)}>
 					Edit
 				</button>
 			</div>

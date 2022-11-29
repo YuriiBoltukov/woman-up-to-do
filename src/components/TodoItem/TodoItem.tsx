@@ -24,9 +24,11 @@ export const TodoItem = (props: any) => {
 	function completeTodo(id: any) {
 		dispatch(toggleTodoComplete(id));
 	}
-
+	/**
+	 * for removing todo
+	 * @param {string} id
+	 */
 	function remove(id: any) {
-		console.log(id);
 		dispatch(removeTodo(id));
 	}
 
@@ -58,7 +60,7 @@ export const TodoItem = (props: any) => {
 				) : null}
 
 				<button onClick={() => handleOpenDescription()}>Viewing</button>
-				<Link to='/update/:id' state={{ todo: data }}>
+				<Link to={`/update/${data.id}`}>
 					<button>Edit</button>
 				</Link>
 				<button onClick={() => remove(props.id)}>Remove</button>

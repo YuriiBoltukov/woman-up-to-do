@@ -1,63 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ITodo } from '../../models/data';
+import React from 'react';
 import { TodoList } from '../TodoList';
-import { Link, Routes, Route, useParams } from 'react-router-dom';
+import { Link, Routes, Route } from 'react-router-dom';
 import { CreateTodo } from '../CreateTodo/CreateTodo';
 import { NotFoundPage } from '../NotFoundPage';
 import style from './app.module.scss';
 import EditTodo from '../EditTodo/EditTodo';
 
 const App: React.FC = () => {
-	// /**
-	//  * for saving data to localStorage
-	//  * @param {string} key
-	//  * @param {T} value
-	//  * @returns {undefined | Error}
-	//  */
-	// const saveToLocalStorage = <T,>(key: string, value: T): void => {
-	// 	if (!value) throw Error('Value should be defined');
-
-	// 	const stringValue =
-	// 		typeof value === 'string' ? value : JSON.stringify(todos);
-
-	// 	localStorage.setItem(key, stringValue);
-	// };
-
-	/**
-	 * for updating todo and writing data to local storage
-	 * @param {number} id
-	 * @param {string} title
-	 */
-	// const updateTodo = (id: number, title: string): void => {
-	// 	todos.forEach((todo: ITodo) => {
-	// 		if (todo.id === id) {
-	// 			todo.title = title;
-	// 		}
-	// 	});
-
-	// 	setTodos([...todos]);
-
-	// 	saveToLocalStorage<ITodo[]>('tasks', todos);
-	// };
-
-	/**
-	 * to check for data in local storage and if there is data, write it to the todos array
-	 */
-	// useEffect((): void => {
-	// 	if ('tasks' in localStorage) {
-	// 		todos = JSON.parse(localStorage.getItem('tasks') || '[]');
-
-	// 		setTodos(todos);
-	// 	}
-	// }, []);
-
-	/**
-	 * to set focus to input after every todos change
-	 */
-	// useEffect((): void => {
-	// 	inputRef.current?.focus();
-	// }, [todos]);
-
 	return (
 		<div className={style.container}>
 			<header className={style.header}>

@@ -1,29 +1,24 @@
+/**
+ * for describing todo as default
+ */
 export interface ITodo {
-	id?: string;
-	title?: string;
-	description?: string;
+	title: string;
+	description?: string | undefined;
 	date?: string;
 	file?: string[] | string;
-	complete?: boolean;
+	complete: boolean;
 }
 
-export interface IState {
-	todos: ITodo[];
+/**
+ * for describing todo from backend
+ */
+export interface ITodoRes extends ITodo {
+	id: string | undefined;
 }
 
-export interface ITodoItem extends ITodo {
-	toggleComplete: (id: number) => void;
-	removeTodo: (id: number) => void;
-	updateTodo: (id: number, title: string) => void;
-}
-
-export interface ITodoList {
-	items: ITodo[];
-	toggleComplete: (id: number) => void;
-	removeTodo: (id: number) => void;
-	updateTodo: (id: number, title: string) => void;
-}
-
-export interface DescriptionProps extends ITodo {
-	setActive: () => void;
+/**
+ * for describing todo state
+ */
+export interface ITodoState {
+	todos: ITodoRes[];
 }
