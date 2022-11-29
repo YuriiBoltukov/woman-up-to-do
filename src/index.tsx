@@ -7,9 +7,10 @@ import { Provider } from 'react-redux';
 import store, { persistor } from './store/store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
-const root = ReactDOM.createRoot(
+const root: ReactDOM.Root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
 );
+
 root.render(
 	<BrowserRouter>
 		<Provider store={store}>

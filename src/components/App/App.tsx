@@ -2,7 +2,6 @@ import React from 'react';
 import { TodoList } from '../TodoList';
 import { Link, Routes, Route } from 'react-router-dom';
 import { CreateTodo } from '../CreateTodo/CreateTodo';
-import { NotFoundPage } from '../NotFoundPage';
 import style from './app.module.scss';
 import EditTodo from '../EditTodo/EditTodo';
 
@@ -36,7 +35,6 @@ const App: React.FC = () => {
 					<Route path='/' element={<TodoList />} />
 					<Route path='/create' element={<CreateTodo />} />
 					<Route path='/update/:id' element={<EditTodo />} />
-					<Route path='*' element={<NotFoundPage />} />
 				</Routes>
 			</section>
 		</div>
